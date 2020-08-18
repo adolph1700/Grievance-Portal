@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <!-- BootStrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Jquery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- JS -->
+    <script>
+    
+$(document).ready(function () {
+  google.charts.load('current', {'packages':['corechart']});
+ function getData(Url){
+   $.getJSON(Url,function(data){
+   
+
+console.log(data);
+var solved=data.solved;
+var pending=data.pending;
+var college = data.college;
+var hostel = data.hostel;
+
+var hostelSecurity   = data.hostelSecurity;
+var hostelStaff   = data.hostelStaff;
+var hostelRooms    = data.hostelRooms;
+var hostelWater    = data.hostelWater;
+var hostelMess    = data.hostelMess;
+var hostelElectric    = data.hostelElectric;
+var hostelOthers   = data.hostelOthers;
+
+var collegeSecurity=data.collegeSecurity;
+var collegeWash= data.collegeWash
+var collegeLab  =data.collegeLab
+var collegeClass=data.collegeClass
+var collegeCanteen= data.collegeCanteen
+var collegeElectric= data.collegeElectric
+var collegeOthers=data.collegeOthers
+
+
+google.charts.setOnLoadCallback(drawChart);
+// Draw the chart and set the chart values
+function drawChart() {
+
+var data1 = new google.visualization.DataTable();
+        data1.addColumn('string', 'Complaints');
+        data1.addColumn('number', 'Count');
+        data1.addRows([
+          ['Solved', solved],
+          ['Pending', pending],
+         
+        ]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options_one = {'title':'Complaint Status','titleTextStyle':{ fontSize: 20,bold: true }, 'width':1050, 'height':600, 'colors':['black','#AAABAD'],'is3D':true};
+  var options_two = {'title':'Location','titleTextStyle':{ fontSize: 20,bold: true }, 'width':1050, 'height':600, 'colors':['black','#AAABAD'],'is3D':true};
+  var options_three = {'title':'College','titleTextStyle':{ fontSize: 20,bold: true }, 'width':1050, 'height':600, 'colors':['#20211D','#3B3E3D','#585E61','#7F8181','#AAABAD','#F0F2F2','#D0D4D7'],'is3D':true};
+  var options_four = {'title':'Hostel','titleTextStyle':{ fontSize: 20,bold: true }, 'width':1050, 'height':600, 'colors':['#20211D','#3B3E3D','#585E61','#7F8181','#AAABAD','#F0F2F2','#D0D4D7'],'is3D':true};
+  // Display the chart inside the <div> element with id="piechart"
+  var chart1 = new google.visualization.PieChart(document.getElementById('piechart_one'));
+  chart1.draw(data1, options_one);
+
+  var data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Complaints');
+        data2.addColumn('number', 'Count');
+        data2.addRows([
+          ['College',college],
+          ['Hostel', hostel],
+         
+        ]);
+        var chart2 = new google.visualization.PieChart(document.getElementById('piechart_two'));
+  chart2.draw(data2, options_two);
+  
+  
+  var data3 = new google.visualization.DataTable();
+        data3.addColumn('string', 'Complaints');
+        data3.addColumn('number', 'Count');
+        data3.addRows([
+          ['Security',collegeSecurity],
+          ['Washrooms', collegeWash],
+          ['Electric Equipments', collegeElectric],
+          ['Canteen', collegeCanteen],
+          ['Lab Equipments', collegeLab],
+          ['ClassRooms', collegeClass],
+          ['Others', collegeOthers],
+
+         
+        ]);
+        var chart3 = new google.visualization.PieChart(document.getElementById('piechart_three'));
+  chart3.draw(data3, options_three);
+
+  var data4 = new google.visualization.DataTable();
+        data4.addColumn('string', 'Complaints');
+        data4.addColumn('number', 'Count');
+        data4.addRows([
+          ['Security',hostelSecurity],
+          ['Water Supply',hostelWater],
+          ['Electric Equipments',hostelElectric],
+          ['Mess',hostelMess],
+          ['Staff',hostelStaff],
+          ['Rooms',hostelRooms],
+          ['Others', hostelOthers],
+         
+        ]);
+        var chart4 = new google.visualization.PieChart(document.getElementById('piechart_four'));
+  chart2.draw(data4, options_four);
+
+
+
+
+}
+
+
+  
+  
+  });
+ }
+getData('/dashboard-data/all');
+
+$('#apply').click(function()
+{
+  var type= encodeURIComponent($("#type").val());
+  var Url='/dashboard-data/'+type; 
+  getData(Url);
+});
+});
+    </script>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top"
+      style="
+        border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+        background-color: #fff;
+        box-shadow: 1px 1px 2px 1px grey;
+      "
+    >
+      <a class="navbar-brand" href="/"
+        ><img
+          src="https://www.careerindia.com/img/400x100/2012/05/18-vjtimumbai.jpg"
+          class="d-inline-block align-top"
+          height="55"
+          width="60"
+        /><span style="font-size: 2rem; color: grey; margin-left: 2%;">
+          Grievance Portal</span
+        ></a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" style="margin-right: 35px;">
+            <a class="nav-link" href="#"
+              ><span style="font-size: 1.5rem;"
+                ><%= name %>, <%= collegeID %></span
+              ></a
+            >
+          </li>
+         
+          <li
+            class="nav-item"
+            style="margin-left: 5px; margin-right: 5px;"
+          >
+          <button class="btn btn-dark"  style='margin-top:5px' onclick="location.assign('/')">
+            Log Out
+           </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidenav">
+      <a href="/profile" class="links ">All Complaints</a>
+      <a href="/profile-mycomplaints" class="links" >My Complaints</a>
+      <a href="/profile-register" class="links">Register Complaint</a>
+      <a href="/dashboard" class="links active">Dashboard</a>
+      
+      
+    </div>
+    <div class="main">
+       
+      <form action="" style="margin: 1% 3% 1% 3%; padding: 2%;">
+        <div class="form-row">
+          <div class="col-md-1">
+            <h5>Filter:</h5>
+          </div>
+          <div class="col-md-3">
+            <select
+              class="form-control"
+              id="type"
+              name="type"
+              style="margin-bottom: 0%;"
+            >
+              <option value="all" selected>All Complaints</option>
+              <option value="my">My Complaints</option>
+              
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button
+              type="button"
+              class="btn btn-dark"
+              style="width: 100%; background-color: black; margin-bottom:10px;"
+              id="apply"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div id="piechart_one"></div>
+      <div id="piechart_two"></div>
+      <div id="piechart_three"></div>
+      <div id="piechart_four"></div>
+      
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Complaints</title>
+    <!-- BootStrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Jquery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Jquery -->
+    <script>
+     
+      $(document).ready(function () {
+        $("#location").change(function () {
+          if ($("#location").val() == "Hostel") {
+            $("#section").html(
+              "<option value='All'>All</option>\
+              <option value='Security'>Security</option>\
+              <option value='Staff'>Staff</option>\
+              <option value='Rooms'>Rooms</option>\
+              <option value='Electric Equipments'>Electric Equipments</option>\
+              <option value='Water Supply'>Water Supply</option>\
+              <option value='Mess'>Mess</option>\
+              <option value='Others'>Others</option>\
+"
+            );
+          } else if ($("#location").val() == "College Campus") {
+            $("#section").html(
+              "<option value='All'>All</option>\
+              <option value='Security'>Security</option>\
+              <option value='Lab Equipments'>Lab Equipments</option>\
+              <option value='Class Rooms'>Class Rooms</option>\
+              <option value='Electric Equipments'>Electric Equipments</option>\
+              <option value='Washrooms'>Washrooms</option>\
+              <option value='Canteen'>Canteen</option>\
+              <option value='Others'>Others</option>\
+"
+            );
+          } else {
+            $("#section").html("");
+          }
+        });
+        $("#apply").click(function () {
+          var location = encodeURIComponent($("#location").val());
+          var section = encodeURIComponent($("#section").val());
+          var duration=encodeURIComponent($("#duration").val());
+
+          var Url = "/complaints-pending-my/" + location + "/" + section +"/" +duration;
+          var completeHTML = "";
+          $.getJSON(Url, function (data) {
+            $("#list").empty();
+            $.each(data, function (index, value) {
+              var date =new Date(value['dateIssued']).toLocaleDateString('en-US');
+              var x =
+                "<div class='Container' style='margin: 1% 3% 1% 3%;border: 1px solid grey;padding: 2%;border-radius: 20px;box-shadow: 1px 1px 2px 1px grey;''>\
+                     <h5>Location:  " +
+                value["location"] +
+                "</h5>\
+                     <hr  />\
+                     <h5>Section:  " +
+                value["section"] +
+                "</h5>\
+                     <hr  />\
+                     <h5>Complaint:  " +
+                value["description"] +
+                "</h5>\
+                     <hr />\
+                     <h5>Date Issued:  " +
+                date +
+                "</h5>\
+                     </div>\
+                     ";
+              completeHTML += x;
+            });
+            $("#sortedlist").html(completeHTML);
+          });
+        });
+       
+      });
+    </script>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top"
+      style="
+        border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+        background-color: #fff;
+        box-shadow: 1px 1px 2px 1px grey;
+      "
+    >
+      <a class="navbar-brand" href="/"
+        ><img
+          src="https://www.careerindia.com/img/400x100/2012/05/18-vjtimumbai.jpg"
+          class="d-inline-block align-top"
+          height="55"
+          width="60"
+        /><span style="font-size: 2rem; color: grey; margin-left: 2%;">
+          Grievance Portal</span
+        ></a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" style="margin-right: 35px;">
+            <a class="nav-link" href="#"
+              ><span style="font-size: 1.5rem;"
+                ><%= name %>, <%= collegeID %></span
+              ></a
+            >
+          </li>
+          <!-- <li
+            class="nav-item"
+            style="margin-left: 5px; margin-right: 5px;"
+          >
+            <a
+              class="nav-link"
+              href="#"
+              id="profile"
+              role="button"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg"
+                alt="Profile"
+                height="30"
+                width="30"
+              />
+            </a>
+          </li> -->
+          <li
+            class="nav-item"
+            style="margin-left: 5px; margin-right: 5px;"
+          >
+          <button class="btn btn-dark"  style='margin-top:5px' onclick="location.assign('/')">
+            Log Out
+           </button> 
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidenav">
+      <a href="/profile" class="links">All Complaints</a>
+      <a href="/profile-mycomplaints" class="links active">My Complaints</a>
+      <a href="/profile-register" class="links">Register Complaint</a>
+      <a href="/dashboard" class="links">Dashboard</a>
+    </div>
+    <div class="main">
+      <script>
+      function link1() {
+        location.assign("/profile-mycomplaints");
+      }
+      function link2(){
+          location.assign("/profile-mycomplaints-solved");
+      }
+      </script>
+      <div class="row">
+        <div class="col-sm" style="padding: 0%;">
+          <button class="tablink2 tabs" id="pending" onclick="link1()">Pending</button>
+        </div>
+        <div class="col-sm" style="padding: 0%;">
+          <button class="tablink1 tabs" id="solved" onclick="link2()">Solved</button>
+        </div>
+      </div>
+      <form action="" style="margin: 1% 3% 1% 3%; padding: 2%;">
+        <div class="form-row">
+          <div class="col-md-1">
+            <h5>Filters:</h5>
+          </div>
+          <div class="col-md-3">
+            <select
+              class="form-control"
+              id="location"
+              name="location"
+              style="margin-bottom: 0%;"
+            >
+              <option value="All" selected>All</option>
+              <option value="College Campus">College Campus</option>
+              <option value="Hostel">Hostel</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <select id="section" class="form-control" name="section"></select>
+          </div>
+          <div class="col-md-3">
+            <select id="duration" class="form-control" name="section">
+              <option value="month" selected>Last Month</option>
+              <option value="week">Last Week</option>
+              <option value="today">Today</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button
+              type="button"
+              class="btn btn-dark"
+              style="width: 100%; background-color: black;margin-bottom: 12px;"
+              id="apply"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div id="list">
+        <%complaints.forEach(function (complaint) { %>
+        <div
+          id="singlecomplaint"
+          class="Container"
+          style="
+            margin: 1% 3% 1% 3%;
+            border: 1px solid grey;
+            padding: 2%;
+            border-radius: 20px;
+            box-shadow: 1px 1px 2px 1px grey;
+          "
+        >
+          <h5>Location:     <%=complaint.location%></h5>
+          <hr  />
+          <h5>Section:      <%=complaint.section%></h5>
+          <hr />
+          <h5>Complaint:      <%=complaint.description%></h5>
+          <hr  />
+          <h5>
+            Date Issued:     <%=complaint.dateIssued.toLocaleDateString() %>
+          </h5>
+        </div>
+        <% });%>
+      </div>
+      <div id="sortedlist"></div>
+    </div>
+  </body>
+</html>

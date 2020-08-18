@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <!-- BootStrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+     <!-- Jquery CDN -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script>
+           $(document).ready(
+             function()
+             {
+              var password=$('#password').val();
+               var repassword=$('#confirmPassword').val();
+               $('#confirmpassword').focus(function(){
+                    if(password!="")
+                    {if(password==repassword)
+                      {
+                        $('errMsg').html()=`<p>Re-entered password is wrong</p> `
+                      }
+
+                    }
+
+
+               });
+
+             
+               
+             }
+
+           );
+     </script>
+
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="
+        border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+        background-color: #fff;
+        box-shadow: 1px 1px 2px 1px grey;
+      "
+    >
+      <a class="navbar-brand" href="/"
+        ><img
+          src="https://www.careerindia.com/img/400x100/2012/05/18-vjtimumbai.jpg"
+          class="d-inline-block align-top"
+          height="55"
+          width="60"
+        /><span style="font-size: 2rem; color: grey;">
+          Grievance Portal</span
+        ></a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+        
+      </button>
+
+    </nav>
+    <div
+    class="Container"
+    style="
+    padding: 3%;
+      width: 70%;
+      margin: 4% auto;
+      border: 1px solid grey;
+      border-radius: 10px;
+      box-shadow: 1px 1px 2px 1px grey;
+    "
+    >
+      <h3 style="text-align: center;">Register</h3>
+      <form className="formStyle" action="/sign-up" method="POST">
+        <div id="Personal-Details">
+          <h6>Personal Details</h6>
+          <div class="form-row">
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">First Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="" name="fname" required/>
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Last Name</span>
+                </div>
+                <input type="text" class="form-control" placeholder="" name="lname"  required/>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-lg-8 col-md-8">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-at"></i
+                  ></span>
+                </div>
+                <input type="email" class="form-control" placeholder="Email" name="email" required />
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-phone"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Phone Number"
+                  name="phone"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="GenderSelect"><i class="fas fa-venus-mars"></i>Gender</label>
+                </div>
+                <select class="custom-select" id="GenderSelect" name="gender" required>
+                  <option  value="Male"selected>Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-calendar-alt"></i
+                  ></span>
+                </div>
+                <input
+                  type="date"
+                  class="form-control"
+                  placeholder="Date of Birth"
+                  name="DOB"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div class="College Details">
+          <h6>College Details</h6>
+          <div class="form-row">
+            <div class="col-lg-6 col-md-6">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">College ID</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="eg:181080039"
+                  name="collegeID"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="SemSelect">Semester</label>
+                </div>
+                <select class="custom-select" id="SemSelect" name="sem" required>
+                  <option  value="I"selected>I</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                  <option value="VI">VI</option>
+                  <option value="VII">VII</option>
+                  <option value="VIII">VIII</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="YearSelect">Year</label>
+                </div>
+                <select class="custom-select" id="YearSelect" name="year" required>
+                  <option  value="First"selected>First</option>
+                  <option value="Second">Second</option>
+                  <option value="Third">Third</option>
+                  <option value="Fourth">Fourth</option>
+                  
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="programSelect" >Program</label>
+                </div>
+                <select class="custom-select" id="programSelect" name="program" required>
+                  <option  value="B.Tech"selected>B.Tech</option>
+                  <option value="M.Tech">M.Tech</option>
+                  <option value="PHD">Ph.D</option>
+                  <option value="MCA">M.C.A</option>
+                  <option value="Diploma">Diploma</option>
+                 
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="departmentSelect">Department</label>
+                </div>
+                <select class="custom-select" id="departmentSelect" name="department" required>
+                  <option  value="IT"selected>Information Technology</option>
+                  <option value="CS">Computer Science</option>
+                  <option value="Elec">Electrical</option>
+                  <option value="EXTC">Electronics and Telecommunication</option>
+                  <option value="Tronics">Electronics</option>
+                  <option value="Prod">Production</option>
+                  <option value="Textile">Textile</option>
+                  <option value="Mech">Mechanical</option>
+                  <option value="Civil">Civil</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div id="Security Details">
+          <h6>Security Details</h6>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id=""
+                ><i class="fas fa-lock"></i
+              ></span>
+            </div>
+            <input id="password" type="password" class="form-control" placeholder="Password" name="password" required/>
+            <input
+              id="confirmPassword"
+              type="password"
+              class="form-control"
+              placeholder="Confirm Password"
+              name="repassword"
+              required
+            />
+          </div>
+        </div>
+        <div id="errMsg">
+
+        </div>
+        <div style="text-align: right;"> <button class="btn btn-dark" style="margin-top: 5%;width: 20%; background-color: black;">
+          Submit
+        </button></div>
+       
+      </form>
+    </div>
+  </body>
+  <footer>
+    <div
+      class="container-fluid"
+      style="background-color: black; color: white; padding: 1% 2% 2% 2%;"
+    >
+      <div class="row footer">
+        <div class="col-sm" style="text-align: center;">
+          <a href="" class="footerlinks" style="pointer-events: none;">Links</a>
+          <div style="width: 45%; margin: 0 auto;" >
+            <a href="http://www.vjti.ac.in/" class="footerlinks" style="font-size: 1rem;"
+              >VJTI Website</a
+            >
+            <a href="http://www.rlypassconcession.com/" class="footerlinks" style="font-size: 1rem;"
+              >Railway Concession</a
+            >
+          </div>
+        </div>
+        <div class="col-sm" style="text-align: center;">
+          <a href="" class="footerlinks">Contact Us</a>
+        </div>
+        <div class="col-sm" style="text-align: center;">
+          <a href="" class="footerlinks">About</a>
+        </div>
+        <div class="col-sm" style="text-align: center;">
+          <a href="" class="footerlinks">SiteMap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</html>
